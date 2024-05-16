@@ -2,12 +2,14 @@ import { Card, Contador, Label } from './syles'
 
 export type Props = {
   ativo?: boolean
+  contador: number
+  legenda: string
 }
 
-const FiltroCard = (props: Props) => (
-  <Card ativo={props.ativo}>
-    <Contador>3</Contador>
-    <Label>tarefas</Label>
+const FiltroCard = ({ ativo, contador, legenda }: Props) => (
+  <Card ativo={ativo}>
+    <Contador>{contador}</Contador>
+    <Label>{legenda}</Label>
   </Card>
 )
 
