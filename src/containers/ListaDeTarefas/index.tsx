@@ -1,26 +1,30 @@
-import Tarefa from '../../components/FiltroCard/Tarefa'
+import { useSelector } from 'react-redux'
+import Tarefa from '../../components/Tarefa'
 import { Container } from './styles'
+import { RootReducer } from '../../store'
 
-const ListaDeTarefas = () => (
-  <Container>
-    <p>
-      Duas tarefas marcadas como: &quot;categoria&ldquo; e &quot;termo&ldquo;{' '}
-    </p>
-    <ul>
-      <li>
-        <Tarefa></Tarefa>
-      </li>
-      <li>
-        <Tarefa></Tarefa>
-      </li>
-      <li>
-        <Tarefa></Tarefa>
-      </li>
-      <li>
-        <Tarefa></Tarefa>
-      </li>
-    </ul>
-  </Container>
-)
+const ListaDeTarefas = () => {
+  const { itens } = useSelector((state: RootReducer) => state.tarefas)
+  return (
+    <Container>
+      <p>
+        Duas tarefas marcadas como: &quot;categoria&ldquo; e &quot;termo&ldquo;{' '}
+      </p>
+      <ul>
+        {itens.map((t) => (
+          <li key={t.titulo}>
+            <Tarefa
+              id={t.id}
+              descricao={t.descricao}
+              titulo={t.titulo}
+              status={t.status}
+              prioridade={t.prioridade}
+            ></Tarefa>
+          </li>
+        ))}
+      </ul>
+    </Container>
+  )
+}
 
 export default ListaDeTarefas
